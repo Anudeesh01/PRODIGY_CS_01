@@ -1,0 +1,46 @@
+def encrypt(message, shift):
+  encrypted_message = ""
+  for char in message:
+      if char.isalpha():
+          ascii_offset = 65 if char.isupper() else 97
+          encrypted_char = chr((ord(char) - ascii_offset + shift) % 26 + ascii_offset)
+          encrypted_message += encrypted_char
+      else:
+          encrypted_message += char
+  return encrypted_message
+
+def decrypt(message, shift):
+  decrypted_message = ""
+  for char in message:
+      if char.isalpha():
+          ascii_offset = 65 if char.isupper() else 97
+          decrypted_char = chr((ord(char) - ascii_offset - shift) % 26 + ascii_offset)
+          decrypted_message += decrypted_char
+      else:
+          decrypted_message += char
+  return decrypted_message
+
+def main():
+  while True:
+      print("Enter '1' for encryption \nEnter '2' for decryption \nEnter '3' to exit\n")
+      choice =input("Enter your choice: ")
+
+      if choice == '3':
+          print("Exiting the program...")
+          break
+      elif choice == '1':
+          message = input("Enter a message to encrypt: ")
+          shift = int(input("Enter a shift value: "))
+          encrypted_message = encrypt(message, shift)
+          print("Encrypted message:", encrypted_message)
+      elif choice == '2':
+          message = input("Enter a message to decrypt: ")
+          shift = int(input("Enter a shift value: "))
+          decrypted_message = decrypt(message, shift)
+          print("Decrypted message:", decrypted_message)
+      else:
+          print("Invalid choice. Please enter '1', '2', or '3'.")
+          
+      print("\n")
+if __name__ == "__main__":
+  main()
